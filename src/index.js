@@ -1,0 +1,39 @@
+import React from "react";
+import ReactDOM from "react-dom";
+// import App from "./Components/App";
+import App from "./Components/App";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import { ThemeProvider } from "@material-ui/styles";
+import * as serviceWorker from "./serviceWorker";
+
+import theme from "./theme";
+import "./styles.css";
+const SomethingHere = () => {
+  return <div>Something is here</div>;
+};
+
+export const RenderedWithTheme = props => {
+  return (
+    <ThemeProvider theme={theme}>
+      {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+      <CssBaseline />
+      <App
+        RenderedContent={
+          props.RenderedContent ? props.RenderedContent : SomethingHere
+        }
+      />
+    </ThemeProvider>
+  );
+};
+const rootElement = document.getElementById("componentroot");
+if (rootElement)
+  ReactDOM.render(
+    <RenderedWithTheme RenderedContent={SomethingHere} />,
+
+    rootElement
+  );
+
+// If you want your app to work offline and load faster, you can change
+// unregister() to register() below. Note this comes with some pitfalls.
+// Learn more about service workers: http://bit.ly/CRA-PWA
+serviceWorker.unregister();
